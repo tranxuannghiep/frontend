@@ -1,5 +1,7 @@
+import { ROUTES } from "configs/routes";
 import { User } from "models/user";
 import { MdDelete } from "react-icons/md";
+import { useNavigate } from "react-router-dom";
 import { capitalizeString, formatDate } from "utils";
 
 export interface TdTableProps {
@@ -13,7 +15,7 @@ const checkItemRemove = (params: string[], user: User) => {
 };
 
 export default function TdTable({ user, params, setParams }: TdTableProps) {
-
+  const navigate = useNavigate()
   return (
     <tr className={checkItemRemove(params, user) ? "item-remove" : ""}>
       <td className="w-60">
@@ -31,16 +33,14 @@ export default function TdTable({ user, params, setParams }: TdTableProps) {
           />
         </div>
       </td>
-      <td className="link">{user.name}</td>
+      <td className="link" onClick={() => navigate(`${ROUTES.userList}/${user._id}`)}>{user.name}</td>
       <td>{user.email}</td>
       <td>{capitalizeString(user.role)}</td>
-      <td
-        className="link"
-      >
+      <td>
         {user.age}
       </td>
-      <td className="link">{capitalizeString(user.gender)}</td>
-      <td className="link">{formatDate(user.createdAt)}</td>
+      <td >{capitalizeString(user.gender)}</td>
+      <td >{formatDate(user.createdAt)}</td>
       <td className="w-60">
         <div className="dash-left">
           <div className="delete"

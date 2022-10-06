@@ -1,9 +1,8 @@
 import "./FilterUser.scss";
-import { Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { UserFilter } from "models/user";
 import { InputField, SelectField } from "components/FormFields";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 export interface FilterUserProps {
   onFilters: Function;
 }
@@ -43,7 +42,7 @@ export default function FilterUser({ onFilters }: FilterUserProps) {
                 />
               </li>
               <li className="actions">
-                <Button variant="primary" type="submit">
+                <Button variant="contained" type="submit">
                   Search
                 </Button>
               </li>

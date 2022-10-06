@@ -4,8 +4,8 @@
   justify-content: space-between;
   padding: 20px;
   color: #fff;
-  box-shadow: 0 0.5rem 1rem 0 #8997ad40;
-  background-color: #26679b;
+  box-shadow: rgba(0,0,0,0.2) 0px 2px 4px -1px, rgba(0,0,0,0.14) 0px 4px 5px 0px, rgba(0,0,0,0.12) 0px 1px 10px 0px;
+  background-color: #2196f3;
   height: 76px;
   position: fixed;
   top: 0;
@@ -19,7 +19,7 @@
 
     .logo-icon-menu {
       cursor: pointer;
-      color: #b4b4db;
+      color: #fff;
       padding-right: 20px;
       display: flex;
       font-size: 20px;

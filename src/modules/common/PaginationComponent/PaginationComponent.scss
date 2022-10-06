@@ -10,7 +10,10 @@
       }
 
       &:hover {
-        background: #26679b !important;
+        a{
+          color: #fff;
+        }
+        background: #999 !important;
       }
     }
 
@@ -30,7 +33,7 @@
     }
 
     .selected {
-      background-color: #26679b !important;
+      background-color: #999 !important;
 
       a {
         color: #fff;
@@ -45,7 +48,7 @@
     }
 
     select {
-      background-color: #26679b;
+      background-color: #999;
       color: #fff;
 
       &:focus-visible {

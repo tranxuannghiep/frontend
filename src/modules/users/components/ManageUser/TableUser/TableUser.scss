@@ -42,8 +42,8 @@
 
         .delete {
           color: #fff;
-          background-color: #b18aff;
-          border-color: #b18aff;
+          background-color: #e67e22;
+          border-color: #e67e22;
           font-size: 20px;
           width: 34px;
           height: 34px;
@@ -52,9 +52,9 @@
           align-items: center;
           justify-content: center;
           cursor: pointer;
-
+          transition: all .3s;
           &:hover {
-            color: #212529;
+            opacity: .7;
           }
         }
       }
@@ -65,8 +65,9 @@
       vertical-align: middle;
 
       &.item-remove {
+        background-color: #e9ecef;
         td {
-          opacity: 0.6;
+          opacity: 0.8;
         }
       }
 

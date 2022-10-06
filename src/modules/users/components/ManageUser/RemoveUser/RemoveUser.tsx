@@ -1,7 +1,7 @@
 import "./RemoveUser.scss";
 import { Card, ListGroup } from "react-bootstrap";
 import { useState } from "react";
-import { Paper } from "@mui/material";
+import { Button, Paper } from "@mui/material";
 
 export interface RemoveUserProps {
   handleDelete: Function;
@@ -13,13 +13,15 @@ export default function RemoveUser({ params, handleDelete }: RemoveUserProps) {
   return (
     <Paper elevation={3}>
       <div id="RemoveUser">
-        <button
+        <Button
           className="btn"
+          variant="contained"
+          color="secondary"
           disabled={!params.length}
           onClick={() => setOpenDialogRemove(true)}
         >
           Remove selected
-        </button>
+        </Button>
         {openDialogRemove && (
           <div className="dialogRemove d-flex align-items-center justify-content-center">
             <Card>
