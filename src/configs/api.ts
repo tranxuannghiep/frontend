@@ -25,5 +25,7 @@ export const API_PATHS = {
   resetPassword: `${getBaseUrl(APIService.auth)}/resetpassword`,
   uploadAvatar: `${getBaseUrl(APIService.auth)}/upload`,
   getUserList: `${getBaseUrl(APIService.auth)}`,
+  getUserById: `${getBaseUrl(APIService.auth)}/user`,
+  updateUserById: `${getBaseUrl(APIService.auth)}/user`,
   deleteUserList: `${getBaseUrl(APIService.auth)}/delete`,
 };

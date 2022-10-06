@@ -4,6 +4,7 @@ import TdTable from "../TdTableUser/TdTableUser";
 // import TdTable from "../TdTableUser/TdTableUser";
 import "./TableUser.scss";
 import { IoIosArrowRoundDown, IoIosArrowRoundUp } from "react-icons/io";
+import { Paper } from "@mui/material";
 export interface TableUserProps {
   userList: User[];
   setFilters: Function;
@@ -40,71 +41,73 @@ export default function TableUser({
   };
 
   return (
-    <div id="TableUser">
-      <Table>
-        <thead>
-          <tr>
-            <th>
-              <input
-                type="checkbox"
-                checked={
-                  userList.length === params.length && params.length !== 0
-                }
-                onChange={(e) => {
-                  if (e.target.checked) {
-                    setParams(userList.map((val) => val._id));
-                  } else {
-                    setParams([]);
+    <Paper elevation={3}>
+      <div id="TableUser">
+        <Table>
+          <thead>
+            <tr>
+              <th>
+                <input
+                  type="checkbox"
+                  checked={
+                    userList.length === params.length && params.length !== 0
                   }
-                }}
-              />
-            </th>
-            <th
-              className="cursor-pointer" onClick={() => setSort("name")}
-            >
-              Name
-              {getArrow("name")}
-            </th>
-            <th
-              className="cursor-pointer" onClick={() => setSort("email")}
-            >
-              Email
-              {getArrow("email")}
-            </th>
-            <th
-              className="cursor-pointer" onClick={() => setSort("role")}
-            >
-              Role
-              {getArrow("role")}
-            </th>
-            <th className="cursor-pointer" onClick={() => setSort("age")}
-            >
-              Age
-              {getArrow("age")}
-            </th>
-            <th className="cursor-pointer" onClick={() => setSort("gender")}
-            >
-              Gender
-              {getArrow("gender")}
-            </th>
-            <th className="cursor-pointer" onClick={() => setSort("createdAt")}
-            >
-              CreatedAt
-              {getArrow("createdAt")}
-            </th>
+                  onChange={(e) => {
+                    if (e.target.checked) {
+                      setParams(userList.map((val) => val._id));
+                    } else {
+                      setParams([]);
+                    }
+                  }}
+                />
+              </th>
+              <th
+                className="cursor-pointer" onClick={() => setSort("name")}
+              >
+                Name
+                {getArrow("name")}
+              </th>
+              <th
+                className="cursor-pointer" onClick={() => setSort("email")}
+              >
+                Email
+                {getArrow("email")}
+              </th>
+              <th
+                className="cursor-pointer" onClick={() => setSort("role")}
+              >
+                Role
+                {getArrow("role")}
+              </th>
+              <th className="cursor-pointer" onClick={() => setSort("age")}
+              >
+                Age
+                {getArrow("age")}
+              </th>
+              <th className="cursor-pointer" onClick={() => setSort("gender")}
+              >
+                Gender
+                {getArrow("gender")}
+              </th>
+              <th className="cursor-pointer" onClick={() => setSort("createdAt")}
+              >
+                CreatedAt
+                {getArrow("createdAt")}
+              </th>
 
-          </tr>
-        </thead>
-        <tbody>
-          {userList.map(((user) =>
-          (<TdTable
-            params={params}
-            setParams={setParams}
-            key={user._id}
-            user={user}
-          />)))}
-        </tbody>
-      </Table>
-    </div>
+            </tr>
+          </thead>
+          <tbody>
+            {userList.map(((user) =>
+            (<TdTable
+              params={params}
+              setParams={setParams}
+              key={user._id}
+              user={user}
+            />)))}
+          </tbody>
+        </Table>
+      </div>
+    </Paper>
   );
 }
