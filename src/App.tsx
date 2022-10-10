@@ -4,6 +4,7 @@ import ForgotPasswordPage from 'modules/auth/pages/ForgotPasswordPage';
 import LoginPage from 'modules/auth/pages/LoginPage';
 import RegisterPage from 'modules/auth/pages/RegisterPage';
 import ResetPasswordPage from 'modules/auth/pages/ResetPasswordPage';
+import ManageProductPage from 'modules/products/pages/ManageProductPage';
 import DetailUserPage from 'modules/users/pages/DetailUserPage';
 import ManageUserPage from 'modules/users/pages/ManageUserPage';
 import { Route, Routes } from 'react-router-dom';
@@ -24,6 +25,11 @@ function App() {
       <Route path={`${ROUTES.userList}/:userId`} element={
         <Layout>
           <DetailUserPage />
+        </Layout>}
+      />
+      <Route path={ROUTES.productList} element={
+        <Layout>
+          <ManageProductPage />
         </Layout>}
       />
     </Routes>

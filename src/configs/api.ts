@@ -28,4 +28,5 @@ export const API_PATHS = {
   getUserById: `${getBaseUrl(APIService.auth)}/user`,
   updateUserById: `${getBaseUrl(APIService.auth)}/user`,
   deleteUserList: `${getBaseUrl(APIService.auth)}/delete`,
+  getProductList: `${getBaseUrl(APIService.public)}/book/all`,
 };

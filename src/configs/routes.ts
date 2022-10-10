@@ -5,5 +5,6 @@ export const ROUTES = {
   resetPassword: "/reset-password",
   register: "/register",
   admin: "/admin",
-  userList: "/admin/user"
+  userList: "/admin/user",
+  productList: "/admin/product",
 };
