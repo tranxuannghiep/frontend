@@ -1,11 +1,12 @@
 export interface Product {
-    _id: string;
+    _id?: string;
     title: string;
-    author: any;
+    author?: any;
     category: any;
+    avatar?: string;
     description: string;
-    price: number;
-    createdAt: Date;
+    price: number | string;
+    createdAt?: Date;
 }
 
 export interface ProductFilter {

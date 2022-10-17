@@ -7,4 +7,5 @@ export const ROUTES = {
   admin: "/admin",
   userList: "/admin/user",
   productList: "/admin/product",
+  addProduct: "/admin/product/add",
 };

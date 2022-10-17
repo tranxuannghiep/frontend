@@ -1,10 +1,12 @@
 import { combineReducers } from "redux";
 import mangeUserReducer from "../modules/users/redux/mangeUserReducer";
 import mangeProductReducer from "modules/products/redux/mangeProductReducer";
+import categoryReducer from './../modules/redux/categoryReducer';
 
 const rootReducer = combineReducers({
     mangeUserReducer,
-    mangeProductReducer
+    mangeProductReducer,
+    categoryReducer
 });
 
 export default rootReducer;

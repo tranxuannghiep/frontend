@@ -4,6 +4,7 @@ import ForgotPasswordPage from 'modules/auth/pages/ForgotPasswordPage';
 import LoginPage from 'modules/auth/pages/LoginPage';
 import RegisterPage from 'modules/auth/pages/RegisterPage';
 import ResetPasswordPage from 'modules/auth/pages/ResetPasswordPage';
+import AddEditProductPage from 'modules/products/pages/AddEditProductPage';
 import ManageProductPage from 'modules/products/pages/ManageProductPage';
 import DetailUserPage from 'modules/users/pages/DetailUserPage';
 import ManageUserPage from 'modules/users/pages/ManageUserPage';
@@ -30,6 +31,16 @@ function App() {
       <Route path={ROUTES.productList} element={
         <Layout>
           <ManageProductPage />
+        </Layout>}
+      />
+      <Route path={`${ROUTES.productList}/add`} element={
+        <Layout>
+          <AddEditProductPage />
+        </Layout>}
+      />
+      <Route path={`${ROUTES.productList}/:productId`} element={
+        <Layout>
+          <AddEditProductPage />
         </Layout>}
       />
     </Routes>

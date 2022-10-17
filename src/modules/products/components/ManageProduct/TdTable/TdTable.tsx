@@ -22,7 +22,7 @@ export default function TdTable({ product, params, setParams }: TdTableProps) {
         <div className="dash-right">
           <input
             type="checkbox"
-            checked={params.includes(product._id)}
+            checked={params.includes(product._id as string)}
             onChange={(e) => {
               if (!checkItemRemove(params, product)) {
                 setParams([...params, product._id]);
@@ -42,7 +42,7 @@ export default function TdTable({ product, params, setParams }: TdTableProps) {
       <td>
         {product.category.name}
       </td>
-      <td >{formatDate(product.createdAt)}</td>
+      <td >{formatDate(product.createdAt as Date)}</td>
       <td className="w-60">
         <div className="dash-left">
           <div className="delete"

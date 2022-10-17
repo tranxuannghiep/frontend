@@ -30,7 +30,7 @@ export default function RemoveProduct({ params, handleDelete }: RemoveProductPro
                   <span className="title">Confirm Delete</span>
                 </ListGroup.Item>
                 <ListGroup.Item>
-                  <span className="body">Do you want to delete this user?</span>
+                  <span className="body">Do you want to delete this product?</span>
                 </ListGroup.Item>
                 <ListGroup.Item>
                   <div className="d-flex justify-content-between align-items-center">

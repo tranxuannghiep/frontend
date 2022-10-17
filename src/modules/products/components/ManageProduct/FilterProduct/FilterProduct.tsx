@@ -1,20 +1,23 @@
 import "./FilterProduct.scss";
 import { useForm } from "react-hook-form";
-import { UserFilter } from "models/user";
 import { InputField, SelectField } from "components/FormFields";
 import { Button, Paper } from "@mui/material";
+import { ProductFilter } from "models/product";
+import { useSelector } from "react-redux";
+import { RootState } from 'redux/reducer';
 export interface FilterProductProps {
   onFilters: Function;
 }
 export default function FilterProduct({ onFilters }: FilterProductProps) {
+  const { categoryList } = useSelector((state: RootState) => state.categoryReducer)
   const { control, handleSubmit } = useForm({
     defaultValues: {
-      name: "",
-      email: "",
-      role: "",
+      title: "",
+      author: "",
+      category: "",
     },
   });
-  const handleFormSubmit = (values: UserFilter) => {
+  const handleFormSubmit = (values: ProductFilter) => {
     if (onFilters) onFilters(values);
   };
   return (
@@ -25,19 +28,18 @@ export default function FilterProduct({ onFilters }: FilterProductProps) {
           <div className="search-conditions-box">
             <ul className="search-conditions">
               <li className="substring-condition">
-                <InputField name="name" control={control} placeholder="Search name" />
+                <InputField name="title" control={control} placeholder="Search title" />
               </li>
               <li className="substring-condition">
-                <InputField name="email" control={control} placeholder="Search email" />
+                <InputField name="author" control={control} placeholder="Search author" />
               </li>
               <li className="inventory-condition">
                 <SelectField
-                  name="role"
+                  name="category"
                   control={control}
                   options={[
-                    { value: "", label: "Any Role" },
-                    { value: "admin", label: "Admin" },
-                    { value: "guest", label: "Guest" },
+                    { value: "", label: "All Category" },
+                    ...categoryList.map(val => ({ value: val._id, label: val.name }))
                   ]}
                 />
               </li>

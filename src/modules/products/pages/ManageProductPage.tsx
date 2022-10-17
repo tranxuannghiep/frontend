@@ -1,10 +1,12 @@
-import { LinearProgress } from '@mui/material';
+import { Button, LinearProgress } from '@mui/material';
 import axios from 'axios';
 import { API_PATHS } from 'configs/api';
+import { ROUTES } from 'configs/routes';
 import { ProductFilter } from 'models/product';
 import PaginationComponent from 'modules/common/PaginationComponent/PaginationComponent';
 import { useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import { Action } from 'redux';
 import { ThunkDispatch } from 'redux-thunk';
@@ -14,11 +16,13 @@ import RemoveProduct from '../components/ManageProduct/RemoveProduct/RemoveProdu
 import TableProduct from '../components/ManageProduct/TableProduct/TableProduct';
 import { getProductList } from '../redux/mangeProductReducer';
 import "./ManageProductPage.scss";
+import { Box } from '@mui/material';
 export interface ManageProductPageProps {
 }
 
 export default function ManageProductPage(props: ManageProductPageProps) {
 
+    const navigate = useNavigate()
     const dispatch = useDispatch<ThunkDispatch<RootState, null, Action<string>>>()
     const { productList } = useSelector((state: RootState) => state.mangeProductReducer)
     const [params, setParams] = useState<string[]>([]);
@@ -61,7 +65,7 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     }, []);
 
     const handleDelete = async () => {
-        const json = await axios.post(API_PATHS.deleteUserList, { params });
+        const json = await axios.post(API_PATHS.deleteProduct, { params });
         if (json.data.success) {
             toast.success("Delete user successfully !")
             getData(filters);
@@ -72,6 +76,9 @@ export default function ManageProductPage(props: ManageProductPageProps) {
         <div id="ManageProductPage">
             {loading && <LinearProgress style={{ position: 'absolute', top: '8px', width: "95%", background: '#b18aff' }} />}
             <FilterProduct onFilters={onFilters} />
+            <Box mb={5}>
+                <Button variant='contained' color='secondary' onClick={() => navigate(ROUTES.addProduct)}>Add product</Button>
+            </Box>
             <TableProduct
                 productList={productList}
                 params={params}
