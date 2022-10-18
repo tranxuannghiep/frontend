@@ -31,5 +31,7 @@ export const API_PATHS = {
   getCategoryList: `${getBaseUrl(APIService.public)}/category`,
   getProductList: `${getBaseUrl(APIService.public)}/book/all`,
   getProductById: `${getBaseUrl(APIService.public)}/book`,
+  addProduct: `${getBaseUrl(APIService.public)}/book`,
   deleteProduct: `${getBaseUrl(APIService.public)}/book/delete`,
+  uploadProduct: `${getBaseUrl(APIService.public)}/book/upload`,
 };

@@ -29,16 +29,21 @@ export function AddEditProductForm({ initialValues, onSubmit, isEdit }: AddEditP
         price: yup.number().required("Price is required"),
     })
 
-    const { control, handleSubmit } = useForm({
+    const { control, handleSubmit, setValue } = useForm({
         defaultValues: initialValues,
         resolver: yupResolver(schema)
     })
     const handleFormSubmit = async (product: Product) => {
         try {
             setLoading(true)
-            const data = await onSubmit(product)
+            await onSubmit(product)
             setLoading(false)
-            toast.success("Edit product successfully!")
+            if (isEdit) {
+                toast.success("Edit product successfully!")
+            }
+            else {
+                toast.success("Add product successfully!")
+            }
         } catch (error: any) {
             setLoading(false)
             toast.error(error?.response?.data?.message)
@@ -67,7 +72,9 @@ export function AddEditProductForm({ initialValues, onSubmit, isEdit }: AddEditP
                                 onChange={(e) => {
                                     const selectedFile = e.target.files?.[0];
                                     if (selectedFile) {
+                                        setValue("upload", selectedFile)
                                         setImage(URL.createObjectURL(selectedFile))
+
                                     }
                                 }}
                             />
@@ -79,8 +86,8 @@ export function AddEditProductForm({ initialValues, onSubmit, isEdit }: AddEditP
                                 <MdPhotoCamera fontSize="60px" className="icon-camera" />
                             </IconButton>
                             {
-                                image &&
-                                <img src={image} alt="" />
+                                (image || initialValues.image) &&
+                                <img src={image || (initialValues.image as string[])[(initialValues.image?.length as number) - 1]} alt="" />
                             }
                         </label>
                     </Stack>

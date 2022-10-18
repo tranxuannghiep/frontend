@@ -5,6 +5,7 @@ import { ROUTES } from "configs/routes";
 import { Product } from "models/product";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+import { AUTH } from "utils/constants";
 import { AddEditProductForm } from "../components/AddEditProduct/AddEditProductForm";
 import "./AddEditProductPage.scss";
 
@@ -16,6 +17,7 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
     const [loading, setLoading] = useState(false);
     const { productId } = useParams();
     const isEdit = Boolean(productId)
+    console.log(isEdit)
     const navigate = useNavigate()
 
     const getUserDetailById = useCallback(
@@ -44,11 +46,33 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
 
 
     const handleUserFormSubmit = async (product: Product) => {
+        const config = {
+            headers: {
+                Authorization: "Bearer " + localStorage.getItem(AUTH) || "",
+            },
+        };
+
         if (isEdit) {
-            await axios.patch(`${API_PATHS.getProductById}/${product._id}`, product)
+            const data = await axios.patch(`${API_PATHS.getProductById}/${product._id}`, product, config)
+            if (data.data.success) {
+                if (product.upload) {
+                    const formData = new FormData()
+                    formData.append("id", product._id as string)
+                    formData.append("image", product.upload as File)
+                    await axios.post(API_PATHS.uploadProduct, formData, config)
+                }
+            }
         }
         else {
-            await axios.post(`${API_PATHS.getProductById}/${product._id}`, product)
+            const data = await axios.post(API_PATHS.addProduct, product, config)
+            if (data.data.success) {
+                if (product.upload) {
+                    const formData = new FormData()
+                    formData.append("id", data.data.data._id as string)
+                    formData.append("image", product.upload as File)
+                    await axios.post(API_PATHS.uploadProduct, formData, config)
+                }
+            }
         }
         navigate(ROUTES.productList)
     }
@@ -57,7 +81,8 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
         description: '',
         category: '',
         price: '',
-        avatar: '',
+        image: [],
+        upload: null,
         ...product
     }
     return (

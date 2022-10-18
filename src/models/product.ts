@@ -3,7 +3,8 @@ export interface Product {
     title: string;
     author?: any;
     category: any;
-    avatar?: string;
+    image?: string[];
+    upload?: File | null;
     description: string;
     price: number | string;
     createdAt?: Date;
