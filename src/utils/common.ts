@@ -24,3 +24,11 @@ export const validateNumber = (number: number) => {
 export const formatDate = (value: Date) => {
     return new Date(value).toLocaleDateString("en-CA", { year: "numeric", month: "2-digit", day: '2-digit' })
 }
+
+export const STATIC_HOST = 'https://api.ezfrontend.com';
+export const THUMBNAIL_PLACEHOLDER =
+    'https://previews.123rf.com/images/mathier/mathier1905/mathier190500001/134557215-no-thumbnail-images-placeholder-for-forums-blogs-and-websites.jpg';
+
+export function formatPrice(price: any) {
+    return new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(price);
+}

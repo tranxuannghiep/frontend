@@ -8,4 +8,5 @@ export const ROUTES = {
   userList: "/admin/user",
   productList: "/admin/product",
   addProduct: "/admin/product/add",
+  products: "/products",
 };
