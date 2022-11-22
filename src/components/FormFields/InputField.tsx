@@ -8,9 +8,11 @@ export interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
     control: Control<any>;
     label?: string;
     typeInput?: string;
+    minRows?: number;
+    multiline?: boolean;
 }
 
-export function InputField({ name, control, label, typeInput, ...inputProps }: InputFieldProps) {
+export function InputField({ name, control, label, typeInput, minRows, multiline, ...inputProps }: InputFieldProps) {
     const {
         field: { value, onChange, onBlur, ref },
         fieldState: { invalid, error },
@@ -37,6 +39,8 @@ export function InputField({ name, control, label, typeInput, ...inputProps }: I
             inputRef={ref}
             error={invalid}
             helperText={error?.message}
+            multiline={multiline}
+            minRows={minRows}
             inputProps={inputProps}
         />
     );

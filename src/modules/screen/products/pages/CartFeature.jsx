@@ -21,11 +21,10 @@ import {
     TableContainer,
     TableHead,
     TableRow,
-    TextField,
     Typography
 } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useRef, useState } from 'react';
+import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -74,7 +73,6 @@ function CartFeature() {
     const getPrice = useSelector(getTotalPrice);
     const arrayId = useSelector(arrayIdSelector);
     const dispatch = useDispatch();
-    const ref = useRef(null)
     const navigate = useNavigate()
     const columns = [
         { id: 'all', label: 'Tât cả', minWidth: 250 },
@@ -184,9 +182,7 @@ function CartFeature() {
     };
 
     const handleBuy = () => {
-        console.log(ref.current.value);
-        toast.success("Buy success !")
-        navigate("/")
+        navigate("/payment")
     }
 
     const classes = useStyles();
@@ -301,37 +297,24 @@ function CartFeature() {
                         </Paper>
                     </Grid>
                     <Grid item className={classes.right}>
-                        <Paper elevation={2} style={{ padding: 20 }}>
-                            <Box padding={2}>
-                                <Box marginBottom={2}>
-                                    <Typography variant="body2">Giao tới</Typography>
-                                </Box>
-                                <TextField
-                                    inputRef={ref}
-                                    multiline
-                                    minRows={3}
-                                    fullWidth
-                                />
-                            </Box>
-                            <Paper elevation={0} style={{ margin: '10px 0 20px' }}>
-                                <Box padding={2}>
-                                    <Box display="flex" justifyContent="space-between" alignItems="center">
-                                        <Typography variant="body2">Tổng tiền</Typography>
-                                        <Typography variant="body2" color="#fe3834">
-                                            {formatPrice(getPrice)}
-                                        </Typography>
-                                    </Box>
-                                    <Typography
-                                        variant="body2"
-                                        style={{ opacity: 0.8, fontSize: '12px', marginTop: '15px' }}
-                                    >
-                                        * Đơn hàng đã bao gồm thuế VAT nếu có.
+                        <Paper elevation={2} style={{ margin: '10px 0 20px' }}>
+                            <Box padding={4}>
+                                <Box display="flex" justifyContent="space-between" alignItems="center">
+                                    <Typography variant="body2">Tổng tiền</Typography>
+                                    <Typography variant="body2" color="#fe3834">
+                                        {formatPrice(getPrice)}
                                     </Typography>
                                 </Box>
-                            </Paper>
-                            <Button fullWidth variant="contained" onClick={handleBuy}>
-                                Mua hàng
-                            </Button>
+                                <Typography
+                                    variant="body2"
+                                    style={{ opacity: 0.8, fontSize: '12px', marginTop: '15px' }}
+                                >
+                                    * Đơn hàng đã bao gồm thuế VAT nếu có.
+                                </Typography>
+                                <Button fullWidth variant="contained" onClick={handleBuy} style={{ marginTop: "16px" }}>
+                                    Mua hàng
+                                </Button>
+                            </Box>
                         </Paper>
                     </Grid>
                 </Grid>

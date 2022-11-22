@@ -34,4 +34,5 @@ export const API_PATHS = {
   addProduct: `${getBaseUrl(APIService.public)}/book`,
   deleteProduct: `${getBaseUrl(APIService.public)}/book/delete`,
   uploadProduct: `${getBaseUrl(APIService.public)}/book/upload`,
+  payment: `${getBaseUrl(APIService.auth)}/payment`,
 };

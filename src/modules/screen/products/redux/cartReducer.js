@@ -4,6 +4,7 @@ import {
     UPDATE_TO_CART,
     REMOVE_MANY_TO_CART,
     SET_ARRAY_ID,
+    CLEAR_CART
 } from './types';
 
 const initState = {
@@ -62,6 +63,12 @@ const cartReducer = (state = initState, action) => {
             return {
                 ...state,
                 arrayId: action.payload,
+            };
+        }
+        case CLEAR_CART: {
+            return {
+                ...state,
+                carts: [],
             };
         }
         default:

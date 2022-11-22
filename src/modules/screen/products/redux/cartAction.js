@@ -4,6 +4,7 @@ import {
   REMOVE_TO_CART,
   SET_ARRAY_ID,
   UPDATE_TO_CART,
+  CLEAR_CART
 } from './types';
 
 export const addToCart = (payload) => {
@@ -40,3 +41,9 @@ export const setArrayId = (arr) => {
     payload: arr,
   };
 };
+
+export const clearCart = () => {
+  return {
+    type: CLEAR_CART,
+  };
+}

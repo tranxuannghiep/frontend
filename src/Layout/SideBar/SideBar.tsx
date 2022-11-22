@@ -4,14 +4,13 @@ import { AiOutlineLeft } from "react-icons/ai";
 import { FiTag } from "react-icons/fi";
 import { useState } from "react";
 import { Collapse } from "react-bootstrap";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { ROUTES } from "configs/routes";
 import { Paper } from "@mui/material";
 export interface SideBarProps { }
 
 export default function SideBar(props: SideBarProps) {
   const navigate = useNavigate();
-  const location = useLocation();
   const [openCatalog, setOpenCatalog] = useState(false);
   const [openUser, setOpenUser] = useState(false);
   return (
@@ -20,9 +19,6 @@ export default function SideBar(props: SideBarProps) {
         <ul>
           <li
             onClick={() => setOpenCatalog(!openCatalog)}
-            className={
-              location.pathname.includes("/pages/products") ? "active" : ""
-            }
           >
             <div className="d-flex align-items-center justify-content-between">
               <div className="d-flex align-items-center">
@@ -36,13 +32,8 @@ export default function SideBar(props: SideBarProps) {
             <ul>
               <li
                 onClick={() => {
-                  // navigate(ROUTES.manageProduct);
+                  navigate(ROUTES.productList);
                 }}
-                className={
-                  location.pathname.includes("/pages/products/manage-product")
-                    ? "active"
-                    : ""
-                }
               >
                 Product
               </li>
@@ -50,7 +41,6 @@ export default function SideBar(props: SideBarProps) {
           </Collapse>
           <li
             onClick={() => setOpenUser(!openUser)}
-            className={location.pathname.includes("/pages/user") ? "active" : ""}
           >
             <div className="d-flex align-items-center justify-content-between ">
               <div className="d-flex align-items-center">
@@ -64,13 +54,8 @@ export default function SideBar(props: SideBarProps) {
             <ul>
               <li
                 onClick={() => {
-                  // navigate(ROUTES.manageUser);
+                  navigate(ROUTES.userList);
                 }}
-                className={
-                  location.pathname.includes("/pages/user/manage-user")
-                    ? "active"
-                    : ""
-                }
               >
                 User list
               </li>
