@@ -34,7 +34,6 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     });
     const [filters, setFilters] = useState<ProductFilter>({
         title: "",
-        author: "",
         category: ""
     });
     const [loading, setLoading] = useState(false);

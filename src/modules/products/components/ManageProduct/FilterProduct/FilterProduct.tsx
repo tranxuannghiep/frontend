@@ -13,7 +13,6 @@ export default function FilterProduct({ onFilters }: FilterProductProps) {
   const { control, handleSubmit } = useForm({
     defaultValues: {
       title: "",
-      author: "",
       category: "",
     },
   });
@@ -22,16 +21,13 @@ export default function FilterProduct({ onFilters }: FilterProductProps) {
   };
   return (
     <div id="FilterProduct">
-      <h2 className="search-title">Search for users</h2>
+      <h2 className="search-title">Search for products</h2>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Paper elevation={3}>
           <div className="search-conditions-box">
             <ul className="search-conditions">
               <li className="substring-condition">
                 <InputField name="title" control={control} placeholder="Search title" />
-              </li>
-              <li className="substring-condition">
-                <InputField name="author" control={control} placeholder="Search author" />
               </li>
               <li className="inventory-condition">
                 <SelectField
