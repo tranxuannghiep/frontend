@@ -7,12 +7,11 @@ export default function ProductFilters({ filters, onChange }) {
   const handleCategoryChange = (newCategoryId) => {
     if (!onChange) return;
     const newFilters = {
-      'category.id': newCategoryId,
+      'category': newCategoryId,
     };
     onChange(newFilters);
   };
   const handleChange = (values) => {
-    console.log(values);
     if (onChange) onChange(values);
   };
   return (

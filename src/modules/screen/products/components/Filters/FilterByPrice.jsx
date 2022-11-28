@@ -23,37 +23,35 @@ const useStyles = makeStyles((theme) => ({
 export default function FilterByPrice({ onChange }) {
   const classes = useStyles();
   const [values, setValues] = useState({
-    salePrice_lte: 0,
-    salePrice_gte: 0,
+    priceMin: 0,
+    priceMax: 0,
   });
   const handleChange = (e) => {
     const { name, value } = e.target;
     setValues((prevValues) => ({
       ...prevValues,
-      [name]: value,
+      [name]: Number(value),
     }));
   };
   const handleSubmit = () => {
     if (onChange) onChange(values);
-    setValues({
-      salePrice_lte: 0,
-      salePrice_gte: 0,
-    });
   };
   return (
     <Box className={classes.root}>
       <Typography variant="subtitle2">CHỌN KHOẢNG GIÁ</Typography>
       <Box className={classes.range}>
         <TextField
-          name="salePrice_gte"
-          value={values.salePrice_gte}
+          type={"number"}
+          name="priceMin"
+          value={values.priceMin}
           onChange={handleChange}
           size="small"
         />
         <span>-</span>
         <TextField
-          name="salePrice_lte"
-          value={values.salePrice_lte}
+          type={"number"}
+          name="priceMax"
+          value={values.priceMax}
           onChange={handleChange}
           size="small"
         />

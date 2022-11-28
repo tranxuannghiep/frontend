@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     '& > li': {
       marginTop: theme.spacing(1),
       transition: 'all .25s',
+      cursor: 'pointer',
       '&:hover': {
         // color: theme.palettte.primary.dark,
         cursor: 'pointer',
@@ -52,7 +53,7 @@ export default function FilterByCategory({ onChange }) {
   };
   return (
     <Box className={classes.root}>
-      <Typography variant="subtitle2">DANH MỤC SẢN PHẨM</Typography>
+      <Typography variant="body1">DANH MỤC SẢN PHẨM</Typography>
       {loading ? (
         <FilterByCategorySkeleton />
       ) : (

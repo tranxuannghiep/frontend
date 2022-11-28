@@ -2,14 +2,13 @@ import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import axios from 'axios';
 import { API_PATHS } from 'configs/api';
-import { useQuery } from 'modules/screen/hooks/useQuery';
-import queryString from 'query-string';
 import { useEffect, useMemo, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import ProductFilters from '../components/ProductFilters';
 import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductSort from '../components/ProductSort';
 import ProductList from './../components/ProductList';
+import queryString from 'query-string';
+import { useLocation } from 'react-router-dom';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -31,22 +30,7 @@ const useStyles = makeStyles((theme) => ({
 
 function ListPage() {
   const classes = useStyles();
-  const [, setQuery] = useQuery();
-
   const location = useLocation();
-
-  const queryParams = useMemo(() => {
-    const params = queryString.parse(location.search);
-    console.log(params);
-
-    return {
-      ...params,
-      _page: params._page || 1,
-      _limit: params._limit || 8,
-      _sort: params._sort || 'salePrice:ASC',
-    };
-  }, [location.search]);
-
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
@@ -56,6 +40,7 @@ function ListPage() {
     totalDocs: 8,
   });
   const [filters, setFilters] = useState({
+    title: "",
     price: "",
     category: "",
     sortBy: "price",
@@ -63,13 +48,22 @@ function ListPage() {
     page: 1,
     limit: 8
   });
+  const queryParams = useMemo(() => {
+    const params = queryString.parse(location.search);
+    return params.title || ""
+  }, [location.search]);
+
+  useEffect(() => {
+    setFilters(prev => ({
+      ...prev, title: queryParams
+    }))
+  }, [queryParams])
 
   useEffect(() => {
     (async () => {
       try {
         setLoading(true);
         const json = await axios.post(API_PATHS.getProductList, filters);
-        console.log(json)
         if (json.status === 200) {
           setProductList(json.data.data);
           setPagination({
@@ -103,12 +97,7 @@ function ListPage() {
   };
 
   const handleFiltersChange = (newFilters) => {
-    console.log(newFilters);
-    const filters = {
-      ...queryParams,
-      ...newFilters,
-    };
-    setQuery(filters);
+    setFilters({ ...filters, ...newFilters });
   };
   return (
     <Box>
@@ -116,7 +105,7 @@ function ListPage() {
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
             <Paper elevation={0}>
-              <ProductFilters filters={queryParams} onChange={handleFiltersChange} />
+              <ProductFilters filters={filters} onChange={handleFiltersChange} />
             </Paper>
           </Grid>
           <Grid item className={classes.right}>
