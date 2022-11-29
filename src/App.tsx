@@ -6,6 +6,7 @@ import ForgotPasswordPage from 'modules/auth/pages/ForgotPasswordPage';
 import LoginPage from 'modules/auth/pages/LoginPage';
 import RegisterPage from 'modules/auth/pages/RegisterPage';
 import ResetPasswordPage from 'modules/auth/pages/ResetPasswordPage';
+import DashBoard from 'modules/dashboard/pages/DashBoard';
 import AddEditProductPage from 'modules/products/pages/AddEditProductPage';
 import ManageProductPage from 'modules/products/pages/ManageProductPage';
 import CartFeature from 'modules/screen/products/pages/CartFeature';
@@ -33,6 +34,15 @@ function App() {
       <Route path={ROUTES.register} element={<RegisterPage />} />
       <Route path={ROUTES.forgotPassword} element={<ForgotPasswordPage />} />
       <Route path={ROUTES.resetPassword} element={<ResetPasswordPage />} />
+      <Route
+        path={ROUTES.dashboard}
+        element={
+          <Layout >
+            <DashBoard />
+          </Layout>
+
+        }
+      />
       <Route path={ROUTES.userList} element={
         <Layout>
           <ManageUserPage />
@@ -69,7 +79,7 @@ function App() {
         </LayoutProducts>}
       />
       <Route
-        path="/cart"
+        path={ROUTES.cart}
         element={
           <LayoutProducts >
             <CartFeature />
@@ -78,7 +88,7 @@ function App() {
         }
       />
       <Route
-        path="/payment"
+        path={ROUTES.payment}
         element={
           <LayoutProducts >
             <Payment />
@@ -86,6 +96,7 @@ function App() {
 
         }
       />
+
 
     </Routes>
   );

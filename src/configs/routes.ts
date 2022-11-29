@@ -9,4 +9,7 @@ export const ROUTES = {
   productList: "/admin/product",
   addProduct: "/admin/product/add",
   products: "/products",
+  dashboard: "/admin/dashboard",
+  cart: "/cart",
+  payment: "/payment"
 };
