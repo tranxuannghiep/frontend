@@ -38,7 +38,18 @@ export default function DashBoard() {
   const [lowPriceList, setLowPriceList] = useState([]);
   const getData = useCallback(async () => {
     setLoading(true)
-    const data = await axios.get(API_PATHS.getUserList);
+    const res = await axios.get(API_PATHS.payment);
+    if (res.data.success) {
+      const { topSeller, topPrice, highPriceList, lowPriceList, maxQuantity, highPrice, lowPrice, totalProduct } = res.data.data
+      setBestSeller(topSeller)
+      setTotalPriceList(topPrice)
+      setHighPriceList(highPriceList)
+      setLowPriceList(lowPriceList)
+      setQuantity(maxQuantity)
+      setTotalProduct(totalProduct)
+      setHighPrice(highPrice)
+      setLowPrice(lowPrice)
+    }
     setTimeout(() => {
       setLoading(false)
     }, 500)
@@ -55,10 +66,10 @@ export default function DashBoard() {
       }
       <Grid container spacing={3}>
         <Grid item xs={12} md={6} lg={3} xl={3}>
-          <StatisticItem icon={<AiOutlineDollarCircle fontSize='large' color="primary" />} label="Highest quantity" value={quantity} />
+          <StatisticItem icon={<AiOutlineDollarCircle fontSize='large' color="primary" />} label="Quantity" value={quantity} />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
-          <StatisticItem icon={<TbBrandProducthunt fontSize='large' color="primary" />} label="Total product" value={totalProduct} />
+          <StatisticItem icon={<TbBrandProducthunt fontSize='large' color="primary" />} label="Total price" value={totalProduct} />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
           <StatisticItem icon={<ArrowUpwardIcon fontSize='large' color="primary" />} label="Highest price" value={highPrice} />
@@ -67,7 +78,7 @@ export default function DashBoard() {
           <StatisticItem icon={<ArrowDownwardIcon fontSize='large' color="primary" />} label="Lowest price" value={lowPrice} />
         </Grid>
       </Grid>
-      <Box mt={4}>
+      <Box my={4}>
         <Typography variant='h4'>All Products</Typography>
         <Box mt={2}>
           <Grid container spacing={3}>
