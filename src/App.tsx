@@ -15,6 +15,8 @@ import ListPage from 'modules/screen/products/pages/ListPage';
 import Payment from 'modules/screen/products/pages/Payment';
 import DetailUserPage from 'modules/users/pages/DetailUserPage';
 import ManageUserPage from 'modules/users/pages/ManageUserPage';
+import PrivateRoute from 'PrivateRoute/PrivateRoute';
+import SellerRoute from 'PrivateRoute/SellerRoute';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
 
@@ -37,36 +39,52 @@ function App() {
       <Route
         path={ROUTES.dashboard}
         element={
-          <Layout >
-            <DashBoard />
-          </Layout>
-
+          <PrivateRoute>
+            <Layout >
+              <DashBoard />
+            </Layout>
+          </PrivateRoute>
         }
       />
       <Route path={ROUTES.userList} element={
-        <Layout>
-          <ManageUserPage />
-        </Layout>}
+        <PrivateRoute>
+          <Layout>
+            <ManageUserPage />
+          </Layout>
+        </PrivateRoute>
+      }
       />
       <Route path={`${ROUTES.userList}/:userId`} element={
-        <Layout>
-          <DetailUserPage />
-        </Layout>}
+        <PrivateRoute>
+          <Layout>
+            <DetailUserPage />
+          </Layout>
+        </PrivateRoute>
+      }
       />
       <Route path={ROUTES.productList} element={
-        <Layout>
-          <ManageProductPage />
-        </Layout>}
+        <SellerRoute>
+          <Layout>
+            <ManageProductPage />
+          </Layout>
+        </SellerRoute>
+      }
       />
       <Route path={`${ROUTES.productList}/add`} element={
-        <Layout>
-          <AddEditProductPage />
-        </Layout>}
+        <SellerRoute>
+          <Layout>
+            <AddEditProductPage />
+          </Layout>
+        </SellerRoute>
+      }
       />
       <Route path={`${ROUTES.productList}/:productId`} element={
-        <Layout>
-          <AddEditProductPage />
-        </Layout>}
+        <SellerRoute>
+          <Layout>
+            <AddEditProductPage />
+          </Layout>
+        </SellerRoute>
+      }
       />
       <Route path={ROUTES.products} element={
         <LayoutProducts >

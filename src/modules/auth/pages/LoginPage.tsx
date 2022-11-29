@@ -7,7 +7,7 @@ import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
 import { LoginPayload } from "models/auth";
 import { Navigate, useNavigate } from "react-router-dom";
-import { AUTH } from "utils/constants";
+import { AUTH, ROLE } from "utils/constants";
 import { LoginForm } from "../components/LoginForm";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -36,8 +36,10 @@ export default function LoginPage() {
     const handleLoginFormSubmit = async (auth: LoginPayload) => {
         const json = await axios.post(API_PATHS.login, auth);
         localStorage.setItem(AUTH, json.data.token);
+        localStorage.setItem(ROLE, json.data.role);
         setTimeout(() => {
-            navigate(ROUTES.userList);
+            if (json.data.role === "admin") navigate(ROUTES.dashboard);
+            else navigate("/");
         }, 200);
     }
 

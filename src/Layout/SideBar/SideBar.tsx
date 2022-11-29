@@ -5,10 +5,12 @@ import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "configs/routes";
 import { Paper } from "@mui/material";
+import { ROLE } from "utils/constants";
 export interface SideBarProps { }
 
 export default function SideBar(props: SideBarProps) {
   const navigate = useNavigate();
+  const role = localStorage.getItem(ROLE)
   return (
     <Paper elevation={3}>
       <div id="SideBar">
@@ -17,6 +19,7 @@ export default function SideBar(props: SideBarProps) {
             onClick={() => {
               navigate(ROUTES.dashboard);
             }}
+            hidden={role !== "admin"}
           >
             <div className="d-flex align-items-center justify-content-between ">
               <div className="d-flex align-items-center">
@@ -41,6 +44,7 @@ export default function SideBar(props: SideBarProps) {
             onClick={() => {
               navigate(ROUTES.userList);
             }}
+            hidden={role !== "admin"}
           >
             <div className="d-flex align-items-center justify-content-between ">
               <div className="d-flex align-items-center">
