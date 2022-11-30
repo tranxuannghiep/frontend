@@ -60,7 +60,7 @@ export default function FilterByCategory({ onChange }) {
         <ul className={classes.menu}>
           {categoryList.map((category) => (
             <li key={category.id} onClick={() => handleCategoryClick(category)}>
-              <Typography variant="body2" style={{ textTransform: "uppercase" }}>{category.name}</Typography>
+              <Typography variant="body2">{category.name}</Typography>
             </li>
           ))}
         </ul>
