@@ -17,7 +17,6 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
     const [loading, setLoading] = useState(false);
     const { productId } = useParams();
     const isEdit = Boolean(productId)
-    console.log(isEdit)
     const navigate = useNavigate()
 
     const getUserDetailById = useCallback(
@@ -34,7 +33,6 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
             } catch (error) {
                 setLoading(false)
             }
-
         },
         []
     );

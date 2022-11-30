@@ -1,5 +1,4 @@
 import { Button, LinearProgress } from '@mui/material';
-import axios from 'axios';
 import { API_PATHS } from 'configs/api';
 import { ROUTES } from 'configs/routes';
 import { ProductFilter } from 'models/product';
@@ -17,6 +16,7 @@ import TableProduct from '../components/ManageProduct/TableProduct/TableProduct'
 import { getProductList } from '../redux/mangeProductReducer';
 import "./ManageProductPage.scss";
 import { Box } from '@mui/material';
+import axiosClient from 'helpers/axiosClient';
 export interface ManageProductPageProps {
 }
 
@@ -39,7 +39,7 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     const [loading, setLoading] = useState(false);
     const getData = useCallback(async (filters: ProductFilter) => {
         setLoading(true)
-        const json = await axios.post(API_PATHS.getProductList, filters);
+        const json = await axiosClient.post(API_PATHS.getProductList, filters);
         setTimeout(() => {
             setLoading(false)
         }, 500)
@@ -64,7 +64,7 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     }, []);
 
     const handleDelete = async () => {
-        const json = await axios.post(API_PATHS.deleteProduct, { params });
+        const json = await axiosClient.post(API_PATHS.deleteProduct, { params });
         if (json.data.success) {
             toast.success("Delete user successfully !")
             getData(filters);
