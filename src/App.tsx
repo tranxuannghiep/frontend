@@ -16,6 +16,7 @@ import Payment from 'modules/screen/products/pages/Payment';
 import DetailUserPage from 'modules/users/pages/DetailUserPage';
 import ManageUserPage from 'modules/users/pages/ManageUserPage';
 import PrivateRoute from 'PrivateRoute/PrivateRoute';
+import ProtectedRoute from 'PrivateRoute/ProtectedRoute';
 import SellerRoute from 'PrivateRoute/SellerRoute';
 import { Route, Routes } from 'react-router-dom';
 import './App.css';
@@ -87,35 +88,41 @@ function App() {
       }
       />
       <Route path={ROUTES.products} element={
-        <LayoutProducts >
-          <ListPage />
-        </LayoutProducts>}
+        <ProtectedRoute>
+          <LayoutProducts >
+            <ListPage />
+          </LayoutProducts>
+        </ProtectedRoute>
+      }
       />
       <Route path={`${ROUTES.products}/:productId`} element={
-        <LayoutProducts >
-          <DetailPage />
-        </LayoutProducts>}
+        <ProtectedRoute>
+          <LayoutProducts >
+            <DetailPage />
+          </LayoutProducts>
+        </ProtectedRoute>
+      }
       />
       <Route
         path={ROUTES.cart}
         element={
-          <LayoutProducts >
-            <CartFeature />
-          </LayoutProducts>
-
+          <ProtectedRoute>
+            <LayoutProducts >
+              <CartFeature />
+            </LayoutProducts>
+          </ProtectedRoute>
         }
       />
       <Route
         path={ROUTES.payment}
         element={
-          <LayoutProducts >
-            <Payment />
-          </LayoutProducts>
-
+          <ProtectedRoute>
+            <LayoutProducts >
+              <Payment />
+            </LayoutProducts>
+          </ProtectedRoute>
         }
       />
-
-
     </Routes>
   );
 }

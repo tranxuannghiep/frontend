@@ -2,9 +2,9 @@ import { Paper, Typography } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
+import axiosClient from "helpers/axiosClient";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { ForgotPasswordForm } from "../components/ForgotPasswordForm";
@@ -29,7 +29,7 @@ export default function ForgotPasswordPage() {
     const navigate = useNavigate()
 
     const handleLoginFormSubmit = async (email: string) => {
-        const json = await axios.post(API_PATHS.forgotPassword, { email });
+        const json = await axiosClient.post(API_PATHS.forgotPassword, { email });
         toast.success(json.data.message)
         setTimeout(() => {
             navigate(ROUTES.login);

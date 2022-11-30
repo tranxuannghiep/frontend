@@ -1,6 +1,5 @@
 import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import axios from 'axios';
 import { API_PATHS } from 'configs/api';
 import { useEffect, useMemo, useState } from 'react';
 import ProductFilters from '../components/ProductFilters';
@@ -9,6 +8,7 @@ import ProductSort from '../components/ProductSort';
 import ProductList from './../components/ProductList';
 import queryString from 'query-string';
 import { useLocation } from 'react-router-dom';
+import axiosClient from 'helpers/axiosClient';
 
 const useStyles = makeStyles((theme) => ({
   root: {},
@@ -63,7 +63,7 @@ function ListPage() {
     (async () => {
       try {
         setLoading(true);
-        const json = await axios.post(API_PATHS.getProductList, filters);
+        const json = await axiosClient.post(API_PATHS.getProductList, filters);
         if (json.status === 200) {
           setProductList(json.data.data);
           setPagination({

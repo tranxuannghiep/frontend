@@ -1,5 +1,5 @@
-import axios from 'axios';
 import { API_PATHS } from 'configs/api';
+import axiosClient from 'helpers/axiosClient';
 import { useEffect, useState } from 'react';
 
 export default function useProductDetail(productId) {
@@ -10,7 +10,7 @@ export default function useProductDetail(productId) {
     (async () => {
       try {
         setLoading(true);
-        const result = await axios.get(`${API_PATHS.getProductById}/${productId}`)
+        const result = await axiosClient.get(`${API_PATHS.getProductById}/${productId}`)
         setProduct(result.data.data);
       } catch (error) {
         console.log('Failed', error);

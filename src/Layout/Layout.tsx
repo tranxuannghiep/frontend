@@ -3,9 +3,9 @@ import SideBar from "./SideBar/SideBar";
 import "./Layout.scss";
 import { useCallback, useEffect } from "react";
 import { useDispatch } from "react-redux";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { getCategoryList } from "modules/redux/categoryReducer";
+import axiosClient from "helpers/axiosClient";
 export interface LayoutProps {
     children: React.ReactNode;
 }
@@ -13,7 +13,7 @@ export interface LayoutProps {
 export default function Layout({ children }: LayoutProps) {
     const dispatch = useDispatch()
     const getCategory = useCallback(async () => {
-        const res = await axios.get(API_PATHS.getCategoryList)
+        const res = await axiosClient.get(API_PATHS.getCategoryList)
         if (res.status === 200) {
             dispatch(getCategoryList(res.data.data))
         }

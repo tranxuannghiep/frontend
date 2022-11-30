@@ -1,7 +1,7 @@
 import { Box, Button, LinearProgress } from "@mui/material";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
+import axiosClient from "helpers/axiosClient";
 import { Product } from "models/product";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -23,7 +23,7 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
         async (id: string) => {
             try {
                 setLoading(true);
-                const json = await axios.get(`${API_PATHS.getProductById}/${id}`)
+                const json = await axiosClient.get(`${API_PATHS.getProductById}/${id}`)
                 setProduct({
                     ...json.data.data,
                     author: json.data.data.author.name,
@@ -51,24 +51,24 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
         };
 
         if (isEdit) {
-            const data = await axios.patch(`${API_PATHS.getProductById}/${product._id}`, product, config)
+            const data = await axiosClient.patch(`${API_PATHS.getProductById}/${product._id}`, product, config)
             if (data.data.success) {
                 if (product.upload) {
                     const formData = new FormData()
                     formData.append("id", product._id as string)
                     formData.append("image", product.upload as File)
-                    await axios.post(API_PATHS.uploadProduct, formData, config)
+                    await axiosClient.post(API_PATHS.uploadProduct, formData, config)
                 }
             }
         }
         else {
-            const data = await axios.post(API_PATHS.addProduct, product, config)
+            const data = await axiosClient.post(API_PATHS.addProduct, product, config)
             if (data.data.success) {
                 if (product.upload) {
                     const formData = new FormData()
                     formData.append("id", data.data.data._id as string)
                     formData.append("image", product.upload as File)
-                    await axios.post(API_PATHS.uploadProduct, formData, config)
+                    await axiosClient.post(API_PATHS.uploadProduct, formData, config)
                 }
             }
         }

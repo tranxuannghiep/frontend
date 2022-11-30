@@ -2,9 +2,9 @@ import { Paper, Typography } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
+import axiosClient from "helpers/axiosClient";
 import { ResetPasswordPayload } from "models/auth";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
@@ -31,7 +31,7 @@ export default function ResetPasswordPage() {
 
     const handleLoginFormSubmit = async (formValues: ResetPasswordPayload) => {
         console.log(formValues)
-        const json = await axios.post(API_PATHS.resetPassword, formValues);
+        const json = await axiosClient.post(API_PATHS.resetPassword, formValues);
         toast.success(json.data.message)
         setTimeout(() => {
             navigate(ROUTES.login);

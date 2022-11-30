@@ -5,6 +5,7 @@ import { Box } from "@mui/system";
 import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
+import { setAuthToken } from "helpers/axiosClient";
 import { LoginPayload } from "models/auth";
 import { Navigate, useNavigate } from "react-router-dom";
 import { AUTH, ROLE } from "utils/constants";
@@ -37,6 +38,7 @@ export default function LoginPage() {
         const json = await axios.post(API_PATHS.login, auth);
         localStorage.setItem(AUTH, json.data.token);
         localStorage.setItem(ROLE, json.data.role);
+        setAuthToken(json.data.token)
         setTimeout(() => {
             if (json.data.role === "admin") navigate(ROUTES.dashboard);
             else navigate("/");

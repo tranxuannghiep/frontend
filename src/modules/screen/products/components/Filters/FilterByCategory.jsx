@@ -2,8 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { Box, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import FilterByCategorySkeleton from './FilterByCategorySkeleton';
-import axios from 'axios';
 import { API_PATHS } from 'configs/api';
+import axiosClient from 'helpers/axiosClient';
 // import categoryApi from 'api/categoryApi';
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -34,7 +34,7 @@ export default function FilterByCategory({ onChange }) {
   useEffect(() => {
     (async () => {
       try {
-        const list = await axios.get(API_PATHS.getCategoryList);
+        const list = await axiosClient.get(API_PATHS.getCategoryList);
         setCategoryList(
           list.data.data.map((x) => ({
             id: x._id,

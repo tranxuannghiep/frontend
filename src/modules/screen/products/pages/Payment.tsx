@@ -2,7 +2,6 @@ import { Paper, Typography, Box, Button, CircularProgress } from "@mui/material"
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { InputField } from "components/FormFields";
-import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import * as yup from "yup";
 import { useForm } from 'react-hook-form';
@@ -13,6 +12,7 @@ import { API_PATHS } from "configs/api";
 import { useDispatch, useSelector } from "react-redux";
 import { cartSelector, getTotalPrice } from "../redux/selectors/selectors";
 import { clearCart } from "../redux/cartAction";
+import axiosClient from "helpers/axiosClient";
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -66,7 +66,7 @@ export default function Payment() {
         }))
         dispatch(clearCart())
         setLoading(true)
-        await axios.post(API_PATHS.payment, { ...form, listProducts, totalPrice });
+        await axiosClient.post(API_PATHS.payment, { ...form, listProducts, totalPrice });
         setLoading(false)
         toast.success("Buy success!")
         navigate("/");

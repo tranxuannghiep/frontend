@@ -1,6 +1,6 @@
 import { LinearProgress } from '@mui/material';
-import axios from 'axios';
 import { API_PATHS } from 'configs/api';
+import axiosClient from 'helpers/axiosClient';
 import { UserFilter } from 'models/user';
 import PaginationComponent from 'modules/common/PaginationComponent/PaginationComponent';
 import { useCallback, useEffect, useState } from 'react';
@@ -36,7 +36,7 @@ export default function ManageUserPage(props: ManageUserPageProps) {
     const [loading, setLoading] = useState(false);
     const getData = useCallback(async (filters: UserFilter) => {
         setLoading(true)
-        const json = await axios.post(API_PATHS.getUserList, filters);
+        const json = await axiosClient.post(API_PATHS.getUserList, filters);
         setTimeout(() => {
             setLoading(false)
         }, 500)
@@ -61,7 +61,7 @@ export default function ManageUserPage(props: ManageUserPageProps) {
     }, []);
 
     const handleDelete = async () => {
-        const json = await axios.post(API_PATHS.deleteUserList, { params });
+        const json = await axiosClient.post(API_PATHS.deleteUserList, { params });
         if (json.data.success) {
             toast.success("Delete user successfully !")
             getData(filters);

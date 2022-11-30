@@ -311,7 +311,7 @@ function CartFeature() {
                                 >
                                     * Đơn hàng đã bao gồm thuế VAT nếu có.
                                 </Typography>
-                                <Button fullWidth variant="contained" onClick={handleBuy} style={{ marginTop: "16px" }}>
+                                <Button fullWidth variant="contained" onClick={handleBuy} style={{ marginTop: "16px" }} disabled={carts.length === 0}>
                                     Mua hàng
                                 </Button>
                             </Box>

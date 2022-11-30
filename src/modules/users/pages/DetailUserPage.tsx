@@ -1,7 +1,7 @@
 import { Box, Button, LinearProgress } from "@mui/material";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
+import axiosClient from "helpers/axiosClient";
 import { User } from "models/user";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
@@ -21,7 +21,7 @@ export default function DetailUserPage(props: DetailUserPageProps) {
         async (id: string) => {
             try {
                 setLoading(true);
-                const json = await axios.get(`${API_PATHS.getUserById}/${id}`)
+                const json = await axiosClient.get(`${API_PATHS.getUserById}/${id}`)
                 setInitialValues(json.data.data)
                 setLoading(false)
             } catch (error) {
@@ -38,7 +38,7 @@ export default function DetailUserPage(props: DetailUserPageProps) {
 
 
     const handleUserFormSubmit = async (user: User) => {
-        await axios.patch(`${API_PATHS.updateUserById}/${user._id}`, user)
+        await axiosClient.patch(`${API_PATHS.updateUserById}/${user._id}`, user)
         navigate(ROUTES.userList)
     }
     return (

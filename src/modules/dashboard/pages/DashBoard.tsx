@@ -1,7 +1,6 @@
 import { Box, Grid, LinearProgress, Typography } from "@mui/material";
 import { makeStyles } from "@mui/styles";
 import { Theme } from '@mui/material/styles';
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { useCallback, useEffect, useState } from "react";
 import ProductRankingList from "../components/ProductRankingList";
@@ -11,6 +10,7 @@ import ArrowDownwardIcon from '@mui/icons-material/ArrowDownward';
 import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { TbBrandProducthunt } from "react-icons/tb";
+import axiosClient from "helpers/axiosClient";
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,7 +38,7 @@ export default function DashBoard() {
   const [lowPriceList, setLowPriceList] = useState([]);
   const getData = useCallback(async () => {
     setLoading(true)
-    const res = await axios.get(API_PATHS.payment);
+    const res = await axiosClient.get(API_PATHS.payment);
     if (res.data.success) {
       const { topSeller, topPrice, highPriceList, lowPriceList, maxQuantity, highPrice, lowPrice, totalProduct } = res.data.data
       setBestSeller(topSeller)
