@@ -75,7 +75,7 @@ export default function Payment() {
     return (
         <div className={classes.root}>
             <Paper elevation={2} className={classes.box}>
-                <Typography variant="h5" component='h1' align="center">Payment</Typography>
+                <Typography variant="h5" component='h1' align="center">Thanh toán</Typography>
                 <Box mt={4} >
                     <Box maxWidth={600}>
                         <form onSubmit={handleSubmit(handleFormSubmit)}>
@@ -84,7 +84,7 @@ export default function Payment() {
                             <InputField name="phone" control={control} label="Phone" typeInput="positive" />
                             <Box mt={2}>
                                 <Button fullWidth variant="contained" color="primary" type="submit" disabled={loading || carts.length === 0}>
-                                    {loading && <CircularProgress size={16} color="primary" />} Buy now
+                                    {loading && <CircularProgress size={16} color="primary" />} Mua ngay
                                 </Button>
                             </Box>
                         </form>

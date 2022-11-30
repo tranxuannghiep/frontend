@@ -1,52 +1,11 @@
-#Header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 20px;
-  color: #fff;
-  box-shadow: rgba(0,0,0,0.2) 0px 2px 4px -1px, rgba(0,0,0,0.14) 0px 4px 5px 0px, rgba(0,0,0,0.12) 0px 1px 10px 0px;
-  background-color: #2196f3;
-  height: 76px;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 10;
-
-  .logo {
-    display: flex;
-    align-items: center;
-
-    .logo-icon-menu {
-      cursor: pointer;
-      color: #fff;
-      padding-right: 20px;
-      display: flex;
-      font-size: 20px;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .title {
-      font-size: 26px;
-      font-weight: 400;
-    }
-
-    .logo-icon-bell {
-      display: flex;
-      font-size: 22px;
-      align-items: center;
-      justify-content: center;
-      padding-left: 10px;
-    }
-  }
-
+#LayoutProduct{
   .icon-user {
     display: flex;
     font-size: 22px;
     align-items: center;
     justify-content: center;
     position: relative;
+    margin-left: 10px;
 
     &:hover .profile-user {
       visibility: visible;
@@ -88,7 +47,6 @@
       }
     }
   }
-
   .dialogRemove {
     background: rgba(0, 0, 0, 0.35);
     position: fixed;

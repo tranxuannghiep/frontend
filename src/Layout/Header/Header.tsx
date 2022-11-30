@@ -3,7 +3,7 @@ import { AiOutlineMenu, AiOutlineBell } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "configs/routes";
-import { AUTH } from "utils/constants";
+import { AUTH, ROLE } from "utils/constants";
 import { useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { Paper } from "@mui/material";
@@ -29,6 +29,9 @@ export default function Header(props: HeaderProps) {
         </div>
         <div className="icon-user">
           <BiUser />
+          <div className="profile-user">
+            <span onClick={() => setOpenDialog(true)}>Log out</span>
+          </div>
         </div>
         {openDialog && (
           <div className="dialogRemove d-flex align-items-center justify-content-center">
@@ -46,7 +49,7 @@ export default function Header(props: HeaderProps) {
                       className="btn"
                       onClick={() => {
                         setOpenDialog(false);
-                        localStorage.removeItem("user");
+                        localStorage.removeItem(ROLE);
                         localStorage.removeItem(AUTH);
                         navigate(ROUTES.login);
                       }}
