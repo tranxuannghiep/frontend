@@ -36,10 +36,13 @@ export default function FilterByCategory({ onChange }) {
       try {
         const list = await axiosClient.get(API_PATHS.getCategoryList);
         setCategoryList(
-          list.data.data.map((x) => ({
-            id: x._id,
-            name: x.name,
-          }))
+          [
+            { id: "", name: "All category" }, ...list.data.data.map((x) => ({
+              id: x._id,
+              name: x.name,
+            }))
+          ]
+
         );
       } catch (error) {
         console.log('Failed', error);
