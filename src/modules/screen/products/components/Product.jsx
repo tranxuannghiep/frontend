@@ -14,7 +14,7 @@ export default function Product({ product }) {
           <img style={{ aspectRatio: "1/1" }} src={thumbnailUrl} alt={product.name} width="100%" />
         </Box>
       </Link>
-      <Typography variant="body2">{product.title}</Typography>
+      <Typography variant="body2" style={{ textOverflow: "ellipsis", overflow: "hidden", whiteSpace: "nowrap" }}>{product.title}</Typography>
       <Typography variant="body2">
         <Box component="span" mr={1} fontSize="16px" fontWeight="bold">
           {formatPrice(product.price)}
