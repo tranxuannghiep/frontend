@@ -54,7 +54,7 @@ export function AddEditProductForm({ initialValues, onSubmit, isEdit }: AddEditP
             <div id="AddEditProductForm">
                 <form onSubmit={handleSubmit(handleFormSubmit)}>
                     <InputField name="title" control={control} label="Title" />
-                    <InputField name="description" control={control} label="Description" />
+                    <InputField name="description" control={control} label="Description" multiline />
                     <InputField name="price" control={control} label="Price" />
                     <SelectField
                         name="category"
