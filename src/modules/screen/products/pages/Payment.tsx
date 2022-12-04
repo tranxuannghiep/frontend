@@ -1,4 +1,4 @@
-import { Paper, Typography, Box, Button, CircularProgress } from "@mui/material";
+import { Paper, Typography, Box, Button, CircularProgress, Container } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { InputField } from "components/FormFields";
@@ -73,24 +73,29 @@ export default function Payment() {
     }
 
     return (
-        <div className={classes.root}>
-            <Paper elevation={2} className={classes.box}>
-                <Typography variant="h5" component='h1' align="center">Thanh toán</Typography>
-                <Box mt={4} >
-                    <Box maxWidth={600}>
-                        <form onSubmit={handleSubmit(handleFormSubmit)}>
-                            <InputField name="name" control={control} label="Name" />
-                            <InputField name="address" control={control} label="Address" multiline={true} minRows={4} />
-                            <InputField name="phone" control={control} label="Phone" typeInput="positive" />
-                            <Box mt={2}>
-                                <Button fullWidth variant="contained" color="primary" type="submit" disabled={loading || carts.length === 0}>
-                                    {loading && <CircularProgress size={16} color="primary" />} Mua ngay
-                                </Button>
-                            </Box>
-                        </form>
+        <Container>
+            <Box my={2}>
+                <Button variant='contained' onClick={() => navigate(-1)}>Quay lại</Button>
+            </Box>
+            <div className={classes.root}>
+                <Paper elevation={2} className={classes.box}>
+                    <Typography variant="h5" component='h1' align="center">Thanh toán</Typography>
+                    <Box mt={4} >
+                        <Box maxWidth={600}>
+                            <form onSubmit={handleSubmit(handleFormSubmit)}>
+                                <InputField name="name" control={control} label="Name" />
+                                <InputField name="address" control={control} label="Address" multiline={true} minRows={4} />
+                                <InputField name="phone" control={control} label="Phone" typeInput="positive" />
+                                <Box mt={2}>
+                                    <Button fullWidth variant="contained" color="primary" type="submit" disabled={loading || carts.length === 0}>
+                                        {loading && <CircularProgress size={16} color="primary" />} Mua ngay
+                                    </Button>
+                                </Box>
+                            </form>
+                        </Box>
                     </Box>
-                </Box>
-            </Paper>
-        </div>
+                </Paper>
+            </div>
+        </Container>
     );
 }

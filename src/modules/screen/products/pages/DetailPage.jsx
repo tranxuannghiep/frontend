@@ -1,7 +1,7 @@
 import React from 'react';
 import { Box, Container, Grid, LinearProgress, Paper, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import useProductDetail from '../hooks/useProductDetail';
 import ProductThumbnail from '../components/ProductThumbnail';
@@ -9,6 +9,7 @@ import ProductInfo from '../components/ProductInfo';
 import AddToCartForm from '../components/AddToCartForm';
 import { addToCart } from '../redux/cartAction';
 import { openToolTipCart } from '../redux/visibleAction';
+import { Button } from '@mui/material';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -36,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 export default function DetailPage() {
   const classes = useStyles();
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const { productId } = useParams();
   const { product, loading } = useProductDetail(productId);
   if (loading)
@@ -57,6 +58,9 @@ export default function DetailPage() {
   return (
     <Box className={classes.root}>
       <Container>
+        <Box my={2}>
+          <Button variant='contained' onClick={() => navigate(-1)}>Quay lại</Button>
+        </Box>
         <Paper elevation={0}>
           <Grid container>
             <Grid item className={classes.left}>

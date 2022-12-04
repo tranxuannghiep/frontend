@@ -189,6 +189,9 @@ function CartFeature() {
     return (
         <Box className={classes.root}>
             <Container>
+                <Box my={2}>
+                    <Button variant='contained' onClick={() => navigate(-1)}>Quay lại</Button>
+                </Box>
                 <Typography component="h2" variant="h4" marginBottom={6}>
                     Giỏ hàng
                 </Typography>
