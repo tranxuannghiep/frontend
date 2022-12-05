@@ -4,7 +4,8 @@ import {
   REMOVE_TO_CART,
   SET_ARRAY_ID,
   UPDATE_TO_CART,
-  CLEAR_CART
+  CLEAR_CART,
+  ADD_ID_SHOP
 } from './types';
 
 export const addToCart = (payload) => {
@@ -45,5 +46,12 @@ export const setArrayId = (arr) => {
 export const clearCart = () => {
   return {
     type: CLEAR_CART,
+  };
+}
+
+export const addIdShop = (id) => {
+  return {
+    type: ADD_ID_SHOP,
+    payload: id
   };
 }

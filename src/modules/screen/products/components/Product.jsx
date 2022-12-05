@@ -1,9 +1,12 @@
 import React from 'react';
 import { Box, Typography } from '@mui/material';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { formatPrice, THUMBNAIL_PLACEHOLDER } from 'utils';
+import { FcShop } from 'react-icons/fc';
+import { ROUTES } from 'configs/routes';
 
 export default function Product({ product }) {
+  const navigate = useNavigate()
   const thumbnailUrl = product.image.length > 0
     ? product.image[0]
     : THUMBNAIL_PLACEHOLDER;
@@ -20,6 +23,15 @@ export default function Product({ product }) {
           {formatPrice(product.price)}
         </Box>
       </Typography>
+      <Box py={1} display="flex" alignItems="center">
+        <FcShop
+          fontSize={20}
+          cursor="pointer"
+          style={{ marginRight: 10 }}
+          onClick={() => navigate(`/${ROUTES.shop}/${product.author._id}`)}
+        />
+        <Typography variant='body2'>{product.author.name}</Typography>
+      </Box>
     </Box>
   );
 }

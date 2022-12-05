@@ -4,12 +4,14 @@ import {
     UPDATE_TO_CART,
     REMOVE_MANY_TO_CART,
     SET_ARRAY_ID,
-    CLEAR_CART
+    CLEAR_CART,
+    ADD_ID_SHOP
 } from './types';
 
 const initState = {
     carts: [],
     arrayId: [],
+    idShop: ''
 };
 const cartReducer = (state = initState, action) => {
     switch (action.type) {
@@ -70,6 +72,12 @@ const cartReducer = (state = initState, action) => {
                 ...state,
                 carts: [],
             };
+        }
+        case ADD_ID_SHOP: {
+            return {
+                ...state,
+                idShop: action.payload
+            }
         }
         default:
             return state;
