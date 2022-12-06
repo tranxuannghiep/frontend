@@ -95,6 +95,14 @@ function App() {
         </ProtectedRoute>
       }
       />
+      <Route path={`${ROUTES.shop}/:id`} element={
+        <ProtectedRoute>
+          <LayoutProducts >
+            <ListPage />
+          </LayoutProducts>
+        </ProtectedRoute>
+      }
+      />
       <Route path={`${ROUTES.products}/:productId`} element={
         <ProtectedRoute>
           <LayoutProducts >

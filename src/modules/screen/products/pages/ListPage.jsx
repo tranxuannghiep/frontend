@@ -1,4 +1,4 @@
-import { Box, Container, Grid, Pagination, Paper } from '@mui/material';
+import { Box, Button, Container, Grid, Pagination, Paper } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { API_PATHS } from 'configs/api';
 import { useEffect, useMemo, useState } from 'react';
@@ -7,7 +7,7 @@ import ProductSkeletonList from '../components/ProductSkeletonList';
 import ProductSort from '../components/ProductSort';
 import ProductList from './../components/ProductList';
 import queryString from 'query-string';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate, useParams } from 'react-router-dom';
 import axiosClient from 'helpers/axiosClient';
 
 const useStyles = makeStyles((theme) => ({
@@ -31,6 +31,8 @@ const useStyles = makeStyles((theme) => ({
 function ListPage() {
   const classes = useStyles();
   const location = useLocation();
+  const navigate = useNavigate()
+  const { id } = useParams()
   const [productList, setProductList] = useState([]);
   const [loading, setLoading] = useState(true);
   const [pagination, setPagination] = useState({
@@ -63,6 +65,12 @@ function ListPage() {
     (async () => {
       try {
         setLoading(true);
+        if (location.pathname.includes("/shop/products")) {
+          filters.author = id
+        }
+        else {
+          delete filters.author
+        }
         const json = await axiosClient.post(API_PATHS.getProductList, filters);
         if (json.status === 200) {
           setProductList(json.data.data);
@@ -78,7 +86,7 @@ function ListPage() {
       }
       setLoading(false);
     })();
-  }, [filters]);
+  }, [filters, location.pathname, id]);
   // handle
   const handlePageChange = (e, page) => {
     const newFilters = {
@@ -102,6 +110,9 @@ function ListPage() {
   return (
     <Box>
       <Container>
+        {location.pathname.includes("/shop/products") &&
+          <Button variant='contained' onClick={() => navigate("/products")}>Quay lại shop chính</Button>
+        }
         <Grid container spacing={1}>
           <Grid item className={classes.left}>
             <Paper elevation={0}>

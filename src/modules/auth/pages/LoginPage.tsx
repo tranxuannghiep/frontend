@@ -8,7 +8,7 @@ import { ROUTES } from "configs/routes";
 import { setAuthToken } from "helpers/axiosClient";
 import { LoginPayload } from "models/auth";
 import { Navigate, useNavigate } from "react-router-dom";
-import { AUTH, ROLE } from "utils/constants";
+import { AUTH, ID_USER, ROLE } from "utils/constants";
 import { LoginForm } from "../components/LoginForm";
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -38,6 +38,7 @@ export default function LoginPage() {
         const json = await axios.post(API_PATHS.login, auth);
         localStorage.setItem(AUTH, json.data.token);
         localStorage.setItem(ROLE, json.data.role);
+        localStorage.setItem(ID_USER, json.data.id);
         setAuthToken(json.data.token)
         setTimeout(() => {
             if (json.data.role === "admin") navigate(ROUTES.dashboard);

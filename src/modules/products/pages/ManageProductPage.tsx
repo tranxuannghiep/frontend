@@ -17,6 +17,7 @@ import { getProductList } from '../redux/mangeProductReducer';
 import "./ManageProductPage.scss";
 import { Box } from '@mui/material';
 import axiosClient from 'helpers/axiosClient';
+import { ID_USER, ROLE } from 'utils/constants';
 export interface ManageProductPageProps {
 }
 
@@ -38,6 +39,13 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     });
     const [loading, setLoading] = useState(false);
     const getData = useCallback(async (filters: ProductFilter) => {
+        const role = localStorage.getItem(ROLE) as string
+        if (role === "seller") {
+            filters.author = localStorage.getItem(ID_USER) as string
+        }
+        else {
+            delete filters.author
+        }
         setLoading(true)
         const json = await axiosClient.post(API_PATHS.getProductList, filters);
         setTimeout(() => {
