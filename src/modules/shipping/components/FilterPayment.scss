@@ -1,0 +1,68 @@
+#FilterPayment {
+    .search-title {
+      font-weight: 400;
+      font-size: 32px;
+      margin: 0 0 16px;
+    }
+  
+    .search-conditions-box {
+      position: relative;
+      margin-bottom: 40px;
+      padding: 10px 20px;
+      margin-left: 0;
+  
+      ul.search-conditions {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 0;
+        margin: 0;
+  
+        li {
+          .css-1in441m {
+            width: 0;
+          }
+  
+          &:not(:last-child) {
+            margin-right: 20px;
+          }
+  
+          &.substring-condition,
+          &.categoryId-condition {
+            width: 50%;
+          }
+  
+          &.inventory-condition {
+            width: 35%;
+          }
+  
+          &.actions {
+            button {
+              color: #fff;
+              background-color: #2196f3;
+              border-color: #2196f3;
+              font-size: 15px;
+  
+              &:hover {
+                color: #212529;
+              }
+            }
+          }
+        }
+      }
+  
+      .search-conditions-hidden {
+        border-top: 1px solid #13132b;
+  
+        .MuiOutlinedInput-root {
+          background-color: #252547;
+          border-color: #13132b;
+          color: #fff;
+  
+          svg {
+            color: #fff;
+          }
+        }
+    }
+  }
+}

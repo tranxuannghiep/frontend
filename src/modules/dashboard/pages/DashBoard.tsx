@@ -11,6 +11,7 @@ import ArrowUpwardIcon from '@mui/icons-material/ArrowUpward';
 import { AiOutlineDollarCircle } from "react-icons/ai";
 import { TbBrandProducthunt } from "react-icons/tb";
 import axiosClient from "helpers/axiosClient";
+import { formatPrice } from "utils";
 
 
 const useStyles = makeStyles((theme: Theme) => ({
@@ -69,13 +70,13 @@ export default function DashBoard() {
           <StatisticItem icon={<AiOutlineDollarCircle fontSize='large' color="primary" />} label="Quantity" value={quantity} />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
-          <StatisticItem icon={<TbBrandProducthunt fontSize='large' color="primary" />} label="Total price" value={totalProduct} />
+          <StatisticItem icon={<TbBrandProducthunt fontSize='large' color="primary" />} label="Total price" value={formatPrice(totalProduct)} />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
-          <StatisticItem icon={<ArrowUpwardIcon fontSize='large' color="primary" />} label="Highest price" value={highPrice} />
+          <StatisticItem icon={<ArrowUpwardIcon fontSize='large' color="primary" />} label="Highest price" value={formatPrice(highPrice)} />
         </Grid>
         <Grid item xs={12} md={6} lg={3} xl={3}>
-          <StatisticItem icon={<ArrowDownwardIcon fontSize='large' color="primary" />} label="Lowest price" value={lowPrice} />
+          <StatisticItem icon={<ArrowDownwardIcon fontSize='large' color="primary" />} label="Lowest price" value={formatPrice(lowPrice)} />
         </Grid>
       </Grid>
       <Box my={4}>

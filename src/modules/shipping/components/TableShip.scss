@@ -1,0 +1,35 @@
+#TableShip {
+    table {
+      margin-bottom: 0;
+  
+      .cursor-pointer {
+        cursor: pointer;
+      }
+  
+      thead th {
+        font-size: 14.5px;
+        font-weight: 600;
+        padding: 16px 18px;
+      }
+  
+      tbody {
+        border-top: 1px solid #ccc;
+  
+        tr td {
+          font-size: 13.3px;
+          padding: 10px 17px;
+          min-height: 80px;
+          white-space: nowrap;
+        }
+      }
+  
+      tr {
+        border-color: #ccc;
+        vertical-align: middle;
+        
+        p {
+          margin: 0;
+        }
+      }
+    }
+  }

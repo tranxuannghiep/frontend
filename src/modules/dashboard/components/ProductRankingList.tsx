@@ -4,6 +4,7 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import { formatPrice } from 'utils';
 
 export interface ProductRankingListProps {
     productList: any[]
@@ -30,10 +31,10 @@ export default function ProductRankingList({ productList }: ProductRankingListPr
                             <TableCell align='center'>
                                 {idx + 1}
                             </TableCell>
-                            <TableCell align="center">{product.title}</TableCell>
-                            <TableCell align="center">{product.quantity}</TableCell>
-                            <TableCell align="center">{product.price}</TableCell>
-                            <TableCell align="center">{product.price * product.quantity}</TableCell>
+                            <TableCell align="center">{product.product.title}</TableCell>
+                            <TableCell align="center">{product.product.quantity}</TableCell>
+                            <TableCell align="center">{formatPrice(product.product.price)}</TableCell>
+                            <TableCell align="center">{formatPrice(product.product.price * product.product.quantity)}</TableCell>
 
                         </TableRow>
                     ))}
