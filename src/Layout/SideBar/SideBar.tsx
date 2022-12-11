@@ -6,12 +6,14 @@ import { MdDashboard } from "react-icons/md";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "configs/routes";
 import { Paper } from "@mui/material";
-import { ROLE } from "utils/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/reducer";
 export interface SideBarProps { }
 
 export default function SideBar(props: SideBarProps) {
   const navigate = useNavigate();
-  const role = localStorage.getItem(ROLE)
+  const { user } = useSelector((state: RootState) => state.authReducer)
+  const role = user.role
   return (
     <Paper elevation={3}>
       <div id="SideBar">

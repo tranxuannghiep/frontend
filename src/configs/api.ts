@@ -20,6 +20,8 @@ function getBaseUrl(service: APIService) {
 
 export const API_PATHS = {
   login: `${getBaseUrl(APIService.auth)}/login`,
+  logout: `${getBaseUrl(APIService.auth)}/logout`,
+  getCurrentUser: `${getBaseUrl(APIService.auth)}/token`,
   register: `${getBaseUrl(APIService.auth)}/register`,
   forgotPassword: `${getBaseUrl(APIService.auth)}/forgotpassword`,
   resetPassword: `${getBaseUrl(APIService.auth)}/resetpassword`,

@@ -20,7 +20,27 @@ import PrivateRoute from 'PrivateRoute/PrivateRoute';
 import ProtectedRoute from 'PrivateRoute/ProtectedRoute';
 import SellerRoute from 'PrivateRoute/SellerRoute';
 import { Route, Routes } from 'react-router-dom';
+import store from './redux/configureStore';
+import { isEmpty } from "lodash"
 import './App.css';
+import axiosClient from 'helpers/axiosClient';
+import { API_PATHS } from 'configs/api';
+import { getUser } from 'modules/common/redux/authReducer';
+
+const user = store.getState().authReducer.user
+if (isEmpty(user)) {
+  (async () => {
+    try {
+      const json = await axiosClient.get(API_PATHS.getCurrentUser)
+      store.dispatch(getUser({
+        role: json.data.role,
+        idUser: json.data.id
+      }))
+    } catch (error) {
+      console.log("error");
+    }
+  })()
+}
 
 function App() {
   return (

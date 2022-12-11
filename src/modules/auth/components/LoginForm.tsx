@@ -7,7 +7,6 @@ import { useState } from "react";
 import { useForm } from 'react-hook-form';
 import { Link } from "react-router-dom";
 import { toast } from "react-toastify";
-import { AUTH } from "utils/constants";
 import * as yup from "yup";
 
 export interface LoginFormProps {
@@ -34,7 +33,6 @@ export function LoginForm({ initialValues, onSubmit }: LoginFormProps) {
             await onSubmit(formValues)
             setLoading(false)
         } catch (error: any) {
-            localStorage.removeItem(AUTH);
             toast.error(error?.response?.data?.message)
             setLoading(false)
         }

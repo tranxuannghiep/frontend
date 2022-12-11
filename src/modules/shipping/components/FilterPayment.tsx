@@ -5,12 +5,14 @@ import { Button, Paper } from "@mui/material";
 import { useCallback, useEffect, useState } from "react";
 import axiosClient from "helpers/axiosClient";
 import { API_PATHS } from './../../../configs/api';
-import { ROLE } from "utils/constants";
+import { useSelector } from "react-redux";
+import { RootState } from "redux/reducer";
 export interface FilterPaymentProps {
   onFilters: Function;
 }
 export default function FilterPayment({ onFilters }: FilterPaymentProps) {
-  const role = localStorage.getItem(ROLE)
+  const { user } = useSelector((state: RootState) => state.authReducer)
+  const role = user.role
   const [sellers, setSellers] = useState<any>([])
   const { control, handleSubmit } = useForm({
     defaultValues: {

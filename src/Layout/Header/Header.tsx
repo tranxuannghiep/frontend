@@ -3,15 +3,18 @@ import { AiOutlineMenu, AiOutlineBell } from "react-icons/ai";
 import { BiUser } from "react-icons/bi";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "configs/routes";
-import { AUTH, ROLE } from "utils/constants";
 import { useState } from "react";
 import { Card, ListGroup } from "react-bootstrap";
 import { Paper } from "@mui/material";
+import axiosClient from "helpers/axiosClient";
+import { API_PATHS } from "configs/api";
+import { useDispatch } from "react-redux";
+import { removeUser } from "modules/common/redux/authReducer";
 export interface HeaderProps {
 }
 export default function Header(props: HeaderProps) {
-  // const user = JSON.parse(localStorage.getItem("user") || ""); 
   const navigate = useNavigate();
+  const dispatch = useDispatch()
   const [openDialog, setOpenDialog] = useState(false);
   return (
     <Paper elevation={3}>
@@ -47,10 +50,10 @@ export default function Header(props: HeaderProps) {
                   <div className="d-flex justify-content-between align-items-center">
                     <button
                       className="btn"
-                      onClick={() => {
+                      onClick={async () => {
                         setOpenDialog(false);
-                        localStorage.removeItem(ROLE);
-                        localStorage.removeItem(AUTH);
+                        await axiosClient.get(API_PATHS.logout)
+                        dispatch(removeUser())
                         navigate(ROUTES.login);
                       }}
                     >

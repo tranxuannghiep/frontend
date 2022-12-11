@@ -2,14 +2,16 @@ import { Paper, Typography } from "@mui/material";
 import { Theme } from "@mui/material/styles";
 import { makeStyles } from "@mui/styles";
 import { Box } from "@mui/system";
-import axios from "axios";
 import { API_PATHS } from "configs/api";
 import { ROUTES } from "configs/routes";
-import { setAuthToken } from "helpers/axiosClient";
+import axiosClient from "helpers/axiosClient";
 import { LoginPayload } from "models/auth";
+import { getUser } from "modules/common/redux/authReducer";
+import { useDispatch, useSelector } from "react-redux";
 import { Navigate, useNavigate } from "react-router-dom";
-import { AUTH, ID_USER, ROLE } from "utils/constants";
+import { RootState } from "redux/reducer";
 import { LoginForm } from "../components/LoginForm";
+import { isEmpty } from "lodash";
 
 const useStyles = makeStyles((theme: Theme) => ({
     root: {
@@ -29,24 +31,27 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function LoginPage() {
     const classes = useStyles()
     const navigate = useNavigate()
+    const dispatch = useDispatch()
+    const { user } = useSelector((state: RootState) => state.authReducer)
     const initialValues: LoginPayload = {
         email: '',
         password: ''
     }
 
     const handleLoginFormSubmit = async (auth: LoginPayload) => {
-        const json = await axios.post(API_PATHS.login, auth);
-        localStorage.setItem(AUTH, json.data.token);
-        localStorage.setItem(ROLE, json.data.role);
-        localStorage.setItem(ID_USER, json.data.id);
-        setAuthToken(json.data.token)
+        const json = await axiosClient.post(API_PATHS.login, auth);
+        dispatch(getUser({
+            role: json.data.role,
+            idUser: json.data.id
+        }))
         setTimeout(() => {
-            if (json.data.role === "admin") navigate(ROUTES.dashboard);
+            if (json.data.role === "admin")
+                navigate(ROUTES.userList);
             else navigate("/");
         }, 200);
     }
 
-    const isLogin = Boolean(localStorage.getItem(AUTH))
+    const isLogin = !isEmpty(user)
     if (isLogin) return <Navigate to={ROUTES.userList} />;
     return (
         <div className={classes.root}>

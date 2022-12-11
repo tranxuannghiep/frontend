@@ -17,12 +17,11 @@ import { getProductList } from '../redux/mangeProductReducer';
 import "./ManageProductPage.scss";
 import { Box } from '@mui/material';
 import axiosClient from 'helpers/axiosClient';
-import { ID_USER, ROLE } from 'utils/constants';
 export interface ManageProductPageProps {
 }
 
 export default function ManageProductPage(props: ManageProductPageProps) {
-
+    const { user } = useSelector((state: RootState) => state.authReducer)
     const navigate = useNavigate()
     const dispatch = useDispatch<ThunkDispatch<RootState, null, Action<string>>>()
     const { productList } = useSelector((state: RootState) => state.mangeProductReducer)
@@ -39,9 +38,9 @@ export default function ManageProductPage(props: ManageProductPageProps) {
     });
     const [loading, setLoading] = useState(false);
     const getData = useCallback(async (filters: ProductFilter) => {
-        const role = localStorage.getItem(ROLE) as string
+        const role = user.role
         if (role === "seller") {
-            filters.author = localStorage.getItem(ID_USER) as string
+            filters.author = user.idUser
         }
         else {
             delete filters.author
@@ -58,7 +57,7 @@ export default function ManageProductPage(props: ManageProductPageProps) {
             totalPages: json.data.paginate.totalPages,
             totalDocs: json.data.paginate.totalDocs,
         });
-    }, [dispatch]);
+    }, [dispatch, user]);
 
     useEffect(() => {
         getData(filters)

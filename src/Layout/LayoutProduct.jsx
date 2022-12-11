@@ -20,9 +20,12 @@ import { useLocation } from 'react-router-dom';
 import { useRef, useState } from 'react';
 import { BiUser } from 'react-icons/bi';
 import { Card, ListGroup } from 'react-bootstrap';
-import { AUTH, ROLE } from 'utils/constants';
 import { ROUTES } from 'configs/routes';
 import "./LayoutProduct.scss";
+import axiosClient from 'helpers/axiosClient';
+import { API_PATHS } from 'configs/api';
+import { isEmpty } from "lodash";
+import { removeUser } from 'modules/common/redux/authReducer';
 
 const useStyle = makeStyles((theme) => ({
   root: {},
@@ -79,8 +82,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 export default function LayoutProducts({ children }) {
-  const token = localStorage.getItem(AUTH)
   const [openDialog, setOpenDialog] = useState(false);
+  const { user } = useSelector((state) => state.authReducer)
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const classes = useStyle();
@@ -147,6 +150,8 @@ export default function LayoutProducts({ children }) {
                           left: '-3px !important',
                           marginTop: '-1.1em !important',
                         },
+
+
                       },
                     },
                   }}
@@ -167,7 +172,7 @@ export default function LayoutProducts({ children }) {
                 </Tooltip>
               </Box>
             </ClickAwayListener>
-            {Boolean(token) &&
+            {(!isEmpty(user)) &&
               <>
                 <div className="icon-user">
                   <BiUser />
@@ -189,10 +194,10 @@ export default function LayoutProducts({ children }) {
                           <div className="d-flex justify-content-between align-items-center">
                             <button
                               className="btn"
-                              onClick={() => {
+                              onClick={async () => {
                                 setOpenDialog(false);
-                                localStorage.removeItem(ROLE);
-                                localStorage.removeItem(AUTH);
+                                await axiosClient.get(API_PATHS.logout)
+                                dispatch(removeUser())
                                 navigate(ROUTES.login);
                               }}
                             >

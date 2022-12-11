@@ -1,7 +1,6 @@
 import { ThunkAction } from "redux-thunk";
 import { Action } from "redux";
 
-import { AUTH } from "utils/constants";
 import { RootState } from "redux/reducer";
 
 export function fetchThunk(
@@ -20,7 +19,6 @@ export function fetchThunk(
                 contentType !== "multipart/form-data"
                     ? {
                         "Content-Type": contentType || "application/json",
-                        Authorization: localStorage.getItem(AUTH) || "",
                     }
                     : {},
             cache: "no-store",

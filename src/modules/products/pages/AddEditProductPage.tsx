@@ -5,7 +5,6 @@ import axiosClient from "helpers/axiosClient";
 import { Product } from "models/product";
 import { useCallback, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { AUTH } from "utils/constants";
 import { AddEditProductForm } from "../components/AddEditProduct/AddEditProductForm";
 import "./AddEditProductPage.scss";
 
@@ -44,31 +43,26 @@ export default function AddEditProductPage(props: AddEditProductPageProps) {
 
 
     const handleUserFormSubmit = async (product: Product) => {
-        const config = {
-            headers: {
-                Authorization: "Bearer " + localStorage.getItem(AUTH) || "",
-            },
-        };
 
         if (isEdit) {
-            const data = await axiosClient.patch(`${API_PATHS.getProductById}/${product._id}`, product, config)
+            const data = await axiosClient.patch(`${API_PATHS.getProductById}/${product._id}`, product)
             if (data.data.success) {
                 if (product.upload) {
                     const formData = new FormData()
                     formData.append("id", product._id as string)
                     formData.append("image", product.upload as File)
-                    await axiosClient.post(API_PATHS.uploadProduct, formData, config)
+                    await axiosClient.post(API_PATHS.uploadProduct, formData)
                 }
             }
         }
         else {
-            const data = await axiosClient.post(API_PATHS.addProduct, product, config)
+            const data = await axiosClient.post(API_PATHS.addProduct, product)
             if (data.data.success) {
                 if (product.upload) {
                     const formData = new FormData()
                     formData.append("id", data.data.data._id as string)
                     formData.append("image", product.upload as File)
-                    await axiosClient.post(API_PATHS.uploadProduct, formData, config)
+                    await axiosClient.post(API_PATHS.uploadProduct, formData)
                 }
             }
         }

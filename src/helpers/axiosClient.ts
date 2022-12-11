@@ -1,22 +1,10 @@
-import { AUTH } from "utils/constants";
 import axios, { AxiosRequestConfig, AxiosResponse } from "axios";
 
-const token = localStorage.getItem(AUTH)
-const axiosClient = axios.create()
-if (token) {
-    axiosClient.defaults.headers.common["Authorization"] = "Bearer " + token;
-} else {
-    delete axiosClient.defaults.headers.common["Authorization"];
-}
-
-export const setAuthToken = (tokenLogin: string) => {
-    if (tokenLogin) {
-        axiosClient.defaults.headers.common["Authorization"] = "Bearer " + tokenLogin;
-    } else {
-        delete axiosClient.defaults.headers.common["Authorization"];
+const axiosClient = axios.create(
+    {
+        withCredentials: true
     }
-};
-
+)
 
 // Add a request interceptor
 axiosClient.interceptors.request.use(function (config: AxiosRequestConfig) {
