@@ -8,7 +8,7 @@ import axiosClient from "helpers/axiosClient";
 import { LoginPayload } from "models/auth";
 import { getUser } from "modules/common/redux/authReducer";
 import { useDispatch, useSelector } from "react-redux";
-import { Navigate, useNavigate } from "react-router-dom";
+import { Navigate, useLocation, useNavigate } from "react-router-dom";
 import { RootState } from "redux/reducer";
 import { LoginForm } from "../components/LoginForm";
 import { isEmpty } from "lodash";
@@ -29,6 +29,7 @@ const useStyles = makeStyles((theme: Theme) => ({
 }))
 
 export default function LoginPage() {
+    const location = useLocation();
     const classes = useStyles()
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -50,9 +51,19 @@ export default function LoginPage() {
             else navigate("/");
         }, 200);
     }
-
     const isLogin = !isEmpty(user)
-    if (isLogin) return <Navigate to={ROUTES.userList} />;
+    if (isLogin) {
+        const from = location.state?.from
+        if (user.role === "admin") {
+            return <Navigate to={from ?? ROUTES.userList} />;
+        }
+        else if (user.role === "seller") {
+            return <Navigate to={from ?? ROUTES.productList} />;
+        }
+        return <Navigate to={from ?? "/"} />;
+    }
+
+
     return (
         <div className={classes.root}>
             <Paper elevation={1} className={classes.box}>
