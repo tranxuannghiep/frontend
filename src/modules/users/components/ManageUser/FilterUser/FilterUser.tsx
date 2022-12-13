@@ -37,6 +37,7 @@ export default function FilterUser({ onFilters }: FilterUserProps) {
                   options={[
                     { value: "", label: "Any Role" },
                     { value: "admin", label: "Admin" },
+                    { value: "seller", label: "Seller" },
                     { value: "guest", label: "Guest" },
                   ]}
                 />
