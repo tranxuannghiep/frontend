@@ -46,9 +46,10 @@ export default function LoginPage() {
             idUser: json.data.id
         }))
         setTimeout(() => {
+            const from = location.state?.from
             if (json.data.role === "admin")
                 navigate(ROUTES.userList);
-            else navigate("/");
+            else navigate(from ?? "/");
         }, 200);
     }
     const isLogin = !isEmpty(user)
