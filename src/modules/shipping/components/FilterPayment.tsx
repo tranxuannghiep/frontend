@@ -37,7 +37,7 @@ export default function FilterPayment({ onFilters }: FilterPaymentProps) {
 
   return (
     <div id="FilterPayment">
-      <h2 className="search-title">Search for ship</h2>
+      <h2 className="search-title">Search for order</h2>
       <form onSubmit={handleSubmit(handleFormSubmit)}>
         <Paper elevation={3}>
           <div className="search-conditions-box">

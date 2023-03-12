@@ -65,7 +65,7 @@ export default function SideBar(props: SideBarProps) {
             <div className="d-flex align-items-center justify-content-between ">
               <div className="d-flex align-items-center">
                 <FaShippingFast />
-                <span>Ship</span>
+                <span>Order</span>
               </div>
             </div>
           </li>
