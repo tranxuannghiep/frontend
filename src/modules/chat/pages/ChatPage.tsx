@@ -4,13 +4,20 @@ const SOCKET_URL = "http://localhost:5000";
 
 export default function ChatPage() {
   const socket = useMemo(() => {
-    return io(SOCKET_URL);
+    return io(SOCKET_URL, {
+      transports: ["websocket"],
+      withCredentials: true,
+    });
   }, []);
 
   useEffect(() => {
     if (socket) {
       socket.on("connect", () => {
         console.log("Connected to server");
+      });
+
+      socket.on("message", (data) => {
+        console.log(data);
       });
     }
 
