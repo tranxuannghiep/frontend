@@ -13,5 +13,6 @@ export const ROUTES = {
   dashboard: "/admin/dashboard",
   cart: "/cart",
   payment: "/payment",
-  shipping: "/admin/shipping"
+  shipping: "/admin/shipping",
+  chat: "/chat",
 };
